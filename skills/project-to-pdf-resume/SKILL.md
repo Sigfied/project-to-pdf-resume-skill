@@ -9,7 +9,7 @@ description: Use when turning one or more local project folders into an evidence
 
 Create a technical resume from local project folders without inventing impact. Use code evidence for architecture, features, stack, and implementation details; use user confirmation for outcomes, scale, ownership, production results, and business value.
 
-The default output is an evidence-backed resume package: project evidence notes, outcome questions, polished bullets, source document updates, and a verified PDF when requested.
+The default output is an evidence-backed resume package: project evidence notes, a claim ledger, outcome questions, polished bullets, source document updates, and a verified PDF when requested.
 
 ## Required Flow
 
@@ -23,10 +23,11 @@ The default output is an evidence-backed resume package: project evidence notes,
    - Use that classification to choose the first files to read instead of treating every repository the same.
    - Traverse each project folder with `rg --files`, `find`, manifests, README files, config files, and entrypoints.
    - Read high-signal files: routes, controllers, handlers, services, repositories, jobs, workers, queue/cache code, SQL/query builders, schema or migration code, tests, and deployment files.
-   - Build a source-of-truth evidence map before writing resume claims.
+   - Build a source-of-truth evidence package before writing resume claims.
 
-3. Build an evidence map.
+3. Build an evidence package.
    - For every project, record role positioning, stack, core modules, request/data flow, technical highlights, implementation details, and evidence files.
+   - Include a project index, file evidence index, project evidence card, claim ledger, outcome question backlog, and resume bullet candidate pool when the project has enough substance.
    - Label each claim as `Code evidence`, `Reasonable inference`, or `Needs user confirmation`.
    - Treat ownership, scale, production usage, metrics, business value, cost savings, and performance gains as `Needs user confirmation` unless they are explicitly documented.
    - Separate reusable project notes from final resume copy so the same evidence can support multiple role-specific resumes.

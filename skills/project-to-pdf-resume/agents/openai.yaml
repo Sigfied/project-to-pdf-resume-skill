@@ -1,4 +1,0 @@
-interface:
-  display_name: "Project-to-PDF Resume"
-  short_description: "Build resume PDFs from project folders and verified outcomes."
-  default_prompt: "Turn these project folders into an evidence-backed resume PDF."

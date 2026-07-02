@@ -1,15 +1,18 @@
 # Project To PDF Resume Skill
 
-An evidence-first Codex Skill for turning local project folders into technical resume material, LaTeX-based resume sources, and verified PDF resumes.
+An evidence-first Agent Skill for turning local project folders into technical resume material, LaTeX-based resume sources, and verified PDF resumes.
 
 The Skill is designed for resume workflows where an agent must inspect code before writing, separate code-backed facts from user-confirmed outcomes, and avoid inventing metrics, ownership, production usage, or business impact.
+
+This repository uses the standard Skill shape: an installable directory containing `SKILL.md` with YAML frontmatter, plus optional bundled reference files. It is not tied to one specific agent runtime.
 
 ## What It Does
 
 - Scans one or more local project folders.
 - Detects the dominant project type before deep analysis.
 - Extracts architecture, implementation details, technical highlights, and evidence files.
-- Builds an evidence map with `Code evidence`, `Reasonable inference`, and `Needs user confirmation`.
+- Builds an evidence package with project indexes, file evidence indexes, project evidence cards, claim ledgers, outcome question backlogs, and bullet candidates.
+- Labels claims as `Code evidence`, `Reasonable inference`, or `Needs user confirmation`.
 - Asks targeted questions about production usage, scale, responsibility, metrics, and outcomes.
 - Drafts resume bullets from verified evidence.
 - Prefers LaTeX for final PDF typesetting and requires rendered PDF verification.
@@ -27,8 +30,6 @@ The Skill is designed for resume workflows where an agent must inspect code befo
     └── project-to-pdf-resume/
         ├── SKILL.md
         ├── SKILL.cn.md
-        ├── agents/
-        │   └── openai.yaml
         └── references/
             ├── workflow.md
             ├── workflow.cn.md
@@ -40,11 +41,11 @@ The Skill is designed for resume workflows where an agent must inspect code befo
             └── pdf-production.cn.md
 ```
 
-The actual Skill is contained in `skills/project-to-pdf-resume/`. The repository-level README and license are intentionally kept outside the Skill folder so the Skill itself stays compact.
+The installable Skill is contained in `skills/project-to-pdf-resume/`. The repository-level README and license are intentionally kept outside the Skill folder so the Skill itself stays compact and portable.
+
+The Skill folder intentionally contains no runtime-specific metadata such as Codex-only or OpenAI-only configuration. If an agent runtime supports optional metadata, add that in your own environment without changing the portable Skill core.
 
 ## Installation
-
-### Option 1: Install Into Codex Skills
 
 Clone the repository:
 
@@ -52,26 +53,41 @@ Clone the repository:
 git clone https://github.com/Sigfied/project-to-pdf-resume-skill.git
 ```
 
-Copy the Skill folder into your Codex skills directory:
+Copy the installable Skill folder into the skills directory used by your agent runtime:
+
+```bash
+mkdir -p /path/to/your/skills
+cp -R project-to-pdf-resume-skill/skills/project-to-pdf-resume /path/to/your/skills/
+```
+
+If your agent supports loading Skills from a repository path, point it at:
+
+```text
+skills/project-to-pdf-resume
+```
+
+Start a new agent session, reload skills, or follow your runtime's discovery process so `SKILL.md` is indexed.
+
+### Runtime Examples
+
+Codex-style local install:
 
 ```bash
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 cp -R project-to-pdf-resume-skill/skills/project-to-pdf-resume "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
-Restart Codex or start a new session so the Skill metadata is discovered.
+Other runtimes:
 
-### Option 2: Use From A Checked-Out Repository
-
-If your agent supports loading Skills from repository paths, point it at:
-
-```text
-skills/project-to-pdf-resume
+```bash
+cp -R project-to-pdf-resume-skill/skills/project-to-pdf-resume <your-agent-skills-directory>/
 ```
+
+Use the directory that contains `SKILL.md`; do not copy only the Markdown file, because the Skill depends on `references/`.
 
 ## Usage Examples
 
-Ask Codex to use the Skill on one or more local folders:
+Ask your agent to use the Skill on one or more local folders:
 
 ```text
 Use the project-to-pdf-resume skill to analyze these project folders and turn them into a backend resume PDF.
@@ -90,7 +106,7 @@ Use the Chinese docs for this Skill and generate resume material in Simplified C
 1. Confirm project folders, target role, resume language, and desired outputs.
 2. Identify the dominant project type from file extensions and manifests.
 3. Read high-signal files based on the project type.
-4. Build an evidence map before drafting claims.
+4. Build an evidence package before drafting claims.
 5. Ask the user for missing outcomes and responsibility details.
 6. Write target-role-specific resume bullets.
 7. Prefer LaTeX for final PDF typesetting.
@@ -110,7 +126,7 @@ If you have the official Skill validation script and its dependencies installed,
 python3 path/to/quick_validate.py skills/project-to-pdf-resume
 ```
 
-Expected Skill files:
+Expected portable Skill files:
 
 ```bash
 find skills/project-to-pdf-resume -maxdepth 3 -type f | sort
@@ -142,19 +158,30 @@ MIT License. See [LICENSE](LICENSE).
 
 # Project To PDF Resume Skill 中文说明
 
-这是一个面向 Codex 的 Skill，用于把本地项目文件夹整理成技术简历素材、LaTeX 简历源文件和经过校验的 PDF 简历。
+这是一个标准 Agent Skill，用于把本地项目文件夹整理成技术简历素材、LaTeX 简历源文件和经过校验的 PDF 简历。
 
 它强调先读代码，再写简历：架构、功能、技术栈和实现细节来自代码证据；上线效果、规模、职责、指标和业务价值必须由用户确认。
+
+仓库采用通用 Skill 结构：可安装目录中包含 `SKILL.md` 和 `references/`，不绑定某一个 agent 运行时。
 
 ## 安装
 
 ```bash
 git clone https://github.com/Sigfied/project-to-pdf-resume-skill.git
+mkdir -p /path/to/your/skills
+cp -R project-to-pdf-resume-skill/skills/project-to-pdf-resume /path/to/your/skills/
+```
+
+关键是复制整个包含 `SKILL.md` 的目录，而不是只复制单个文件。
+
+Codex 风格的本地安装示例：
+
+```bash
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 cp -R project-to-pdf-resume-skill/skills/project-to-pdf-resume "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
-然后重启 Codex 或开启新会话。
+然后重启 agent、重新加载 skills，或按你的运行时要求触发发现流程。
 
 ## 使用
 
