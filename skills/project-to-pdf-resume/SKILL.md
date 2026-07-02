@@ -17,12 +17,15 @@ Start with this `SKILL.md` only. Load bundled references only when the current t
 
 | When the task needs... | Read this reference |
 | --- | --- |
-| Full end-to-end execution, project type scanning, architecture analysis, evidence package structure, or multi-folder organization | [references/workflow.md](references/workflow.md) |
+| Stage routing, deliverable overview, or stop conditions | [references/workflow.md](references/workflow.md) |
+| Intake, project type scanning, code inventory, or first evidence directory | [references/intake-and-scan.md](references/intake-and-scan.md) |
+| Evidence package artifacts, JSON metadata, claim ledger schema, or traceability rules | [references/evidence-package.md](references/evidence-package.md) |
+| Architecture synthesis, target-role track selection, material organization, or draft gates | [references/architecture-and-materials.md](references/architecture-and-materials.md) |
 | Outcome interview questions, claim wording, bullet drafting, or final resume copy review | [references/interview-and-writing.md](references/interview-and-writing.md) |
 | Source document creation, LaTeX-first PDF production, compilation, rendering, or visual QA | [references/pdf-production.md](references/pdf-production.md) |
 | Compact Chinese technical resume layout, or a user-provided PDF/TEX layout sample that should guide the final PDF | [references/layout-reference.md](references/layout-reference.md) |
 
-For Simplified Chinese work, load the matching `.cn.md` counterpart at the same stage: [SKILL.cn.md](SKILL.cn.md), [references/workflow.cn.md](references/workflow.cn.md), [references/interview-and-writing.cn.md](references/interview-and-writing.cn.md), [references/pdf-production.cn.md](references/pdf-production.cn.md), or [references/layout-reference.cn.md](references/layout-reference.cn.md).
+For Simplified Chinese work, load the matching `.cn.md` counterpart at the same stage.
 
 After reading a reference, apply only the guidance relevant to the current stage, then return to the required flow below.
 
@@ -42,7 +45,7 @@ After reading a reference, apply only the guidance relevant to the current stage
 
 3. Build an evidence package.
    - For every project, record role positioning, stack, core modules, request/data flow, technical highlights, implementation details, and evidence files.
-   - Include a project index, file evidence index, project evidence card, claim ledger, outcome question backlog, and resume bullet candidate pool when the project has enough substance.
+   - Include JSON-first metadata and artifacts: project index, file evidence index, project evidence card, claim ledger, outcome question backlog, and resume bullet candidate pool when the project has enough substance.
    - Label each claim as `Code evidence`, `Reasonable inference`, or `Needs user confirmation`.
    - Treat ownership, scale, production usage, metrics, business value, cost savings, and performance gains as `Needs user confirmation` unless they are explicitly documented.
    - Separate reusable project notes from final resume copy so the same evidence can support multiple role-specific resumes.

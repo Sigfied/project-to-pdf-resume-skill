@@ -1,3 +1,10 @@
+---
+title: Outcome Interview And Resume Writing
+description: User confirmation questions, claim wording rules, resume bullet drafting, and final copy review.
+lang: en
+version: 1.0.0
+---
+
 # Outcome Interview And Resume Writing
 
 Use this reference when asking for project results and turning evidence into resume text.

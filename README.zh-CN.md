@@ -27,7 +27,7 @@
 - 扫描一个或多个本地项目文件夹。
 - 在深入分析前，先判断主要工程类型。
 - 提取架构、实现细节、技术亮点和证据文件。
-- 建立证据包，包括项目索引、文件证据索引、项目证据卡、结论台账、成果追问队列和 bullet 候选池。
+- 建立 JSON 优先的证据包，包括 metadata、项目索引、文件证据索引、项目证据卡、结论台账、成果追问队列和 bullet 候选池。
 - 将结论标记为 `Code evidence`、`Reasonable inference` 或 `Needs user confirmation`。
 - 针对上线使用、规模、职责、指标和成果提出聚焦问题。
 - 基于已验证证据草拟简历 bullet。
@@ -50,6 +50,12 @@
         └── references/
             ├── workflow.md
             ├── workflow.cn.md
+            ├── intake-and-scan.md
+            ├── intake-and-scan.cn.md
+            ├── evidence-package.md
+            ├── evidence-package.cn.md
+            ├── architecture-and-materials.md
+            ├── architecture-and-materials.cn.md
             ├── interview-and-writing.md
             ├── interview-and-writing.cn.md
             ├── layout-reference.md
@@ -61,6 +67,8 @@
 可安装的 Skill 位于 `skills/project-to-pdf-resume/`。仓库级 README 和 License 放在 Skill 目录外，保证 Skill 本身保持紧凑、可移植。
 
 Skill 目录不包含 Codex-only 或 OpenAI-only 这类运行时专用 metadata。如果某个 agent 运行时支持额外 metadata，可以在自己的环境中添加，不必改动便携 Skill 核心。
+
+`SKILL.md` 包含标准 Skill 必需的 frontmatter。每份 bundled reference 也包含轻量 YAML metadata（`title`、`description`、`lang`、`version`），方便 agent 快速判断是否需要加载。
 
 ## 安装
 
@@ -163,6 +171,9 @@ find skills/project-to-pdf-resume -maxdepth 3 -type f | sort
 
 - `SKILL.md` -> `SKILL.cn.md`
 - `workflow.md` -> `workflow.cn.md`
+- `intake-and-scan.md` -> `intake-and-scan.cn.md`
+- `evidence-package.md` -> `evidence-package.cn.md`
+- `architecture-and-materials.md` -> `architecture-and-materials.cn.md`
 - `interview-and-writing.md` -> `interview-and-writing.cn.md`
 - `layout-reference.md` -> `layout-reference.cn.md`
 - `pdf-production.md` -> `pdf-production.cn.md`

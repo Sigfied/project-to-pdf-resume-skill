@@ -1,3 +1,10 @@
+---
+title: PDF Production
+description: LaTeX-first source generation, PDF compilation, rendering, visual QA, and final output contract.
+lang: en
+version: 1.0.0
+---
+
 # PDF Production
 
 Use this reference when generating or updating the final resume PDF.

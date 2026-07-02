@@ -1,3 +1,10 @@
+---
+title: Layout Reference
+description: Compact Chinese technical resume layout guidance and safe use of user-provided PDF/TEX layout samples.
+lang: en
+version: 1.0.0
+---
+
 # Layout Reference
 
 Use this reference when the final resume should follow a compact Chinese technical resume style or when the user provides existing PDF/TEX resumes as layout samples.

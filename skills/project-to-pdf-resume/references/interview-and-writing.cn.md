@@ -1,3 +1,10 @@
+---
+title: 成果访谈与简历写作
+description: 用户确认问题、结论措辞规则、简历 bullet 草拟和最终文案审阅。
+lang: zh-CN
+version: 1.0.0
+---
+
 # 成果访谈与简历写作
 
 本文件对应 `interview-and-writing.md`，用于追问项目成果，并把证据转成简历文案。

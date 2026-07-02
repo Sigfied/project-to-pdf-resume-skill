@@ -1,3 +1,10 @@
+---
+title: PDF 生产
+description: LaTeX 优先的源文件生成、PDF 编译、渲染、视觉 QA 和最终交付契约。
+lang: zh-CN
+version: 1.0.0
+---
+
 # PDF 生产
 
 本文件对应 `pdf-production.md`，用于生成或更新最终简历 PDF。

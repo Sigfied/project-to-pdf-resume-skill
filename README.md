@@ -27,7 +27,7 @@ The final workflow is designed to produce:
 - Scans one or more local project folders.
 - Detects the dominant project type before deep analysis.
 - Extracts architecture, implementation details, technical highlights, and evidence files.
-- Builds an evidence package with project indexes, file evidence indexes, project evidence cards, claim ledgers, outcome question backlogs, and bullet candidates.
+- Builds a JSON-first evidence package with metadata, project indexes, file evidence indexes, project evidence cards, claim ledgers, outcome question backlogs, and bullet candidates.
 - Labels claims as `Code evidence`, `Reasonable inference`, or `Needs user confirmation`.
 - Asks targeted questions about production usage, scale, responsibility, metrics, and outcomes.
 - Drafts resume bullets from verified evidence.
@@ -50,6 +50,12 @@ The final workflow is designed to produce:
         └── references/
             ├── workflow.md
             ├── workflow.cn.md
+            ├── intake-and-scan.md
+            ├── intake-and-scan.cn.md
+            ├── evidence-package.md
+            ├── evidence-package.cn.md
+            ├── architecture-and-materials.md
+            ├── architecture-and-materials.cn.md
             ├── interview-and-writing.md
             ├── interview-and-writing.cn.md
             ├── layout-reference.md
@@ -61,6 +67,8 @@ The final workflow is designed to produce:
 The installable Skill is contained in `skills/project-to-pdf-resume/`. The repository-level README and license are intentionally kept outside the Skill folder so the Skill itself stays compact and portable.
 
 The Skill folder intentionally contains no runtime-specific metadata such as Codex-only or OpenAI-only configuration. If an agent runtime supports optional metadata, add that in your own environment without changing the portable Skill core.
+
+`SKILL.md` contains the required Skill frontmatter. Each bundled reference also starts with lightweight YAML metadata (`title`, `description`, `lang`, `version`) so agents can quickly decide whether to load it.
 
 ## Installation
 
@@ -163,6 +171,9 @@ Each primary Skill document has a Simplified Chinese counterpart:
 
 - `SKILL.md` -> `SKILL.cn.md`
 - `workflow.md` -> `workflow.cn.md`
+- `intake-and-scan.md` -> `intake-and-scan.cn.md`
+- `evidence-package.md` -> `evidence-package.cn.md`
+- `architecture-and-materials.md` -> `architecture-and-materials.cn.md`
 - `interview-and-writing.md` -> `interview-and-writing.cn.md`
 - `layout-reference.md` -> `layout-reference.cn.md`
 - `pdf-production.md` -> `pdf-production.cn.md`

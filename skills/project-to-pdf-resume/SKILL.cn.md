@@ -1,3 +1,10 @@
+---
+title: 项目到 PDF 简历
+description: 中文入口。用于把一个或多个本地项目文件夹转换为有证据支撑的技术简历、简历 bullet、LaTeX 源文件或 PDF。
+lang: zh-CN
+version: 1.0.0
+---
+
 # 项目到 PDF 简历
 
 ## 概览
@@ -12,12 +19,15 @@
 
 | 当前任务需要... | 读取这份 reference |
 | --- | --- |
-| 完整端到端执行、工程类型扫描、架构分析、证据包结构或多项目组织 | [references/workflow.cn.md](references/workflow.cn.md) |
+| 阶段路由、产物概览或停止条件 | [references/workflow.cn.md](references/workflow.cn.md) |
+| 输入确认、工程类型扫描、代码盘点或第一轮证据目录 | [references/intake-and-scan.cn.md](references/intake-and-scan.cn.md) |
+| 证据包产物、JSON metadata、结论台账 schema 或追溯规则 | [references/evidence-package.cn.md](references/evidence-package.cn.md) |
+| 架构综合、目标岗位方向选择、材料组织或草稿门槛 | [references/architecture-and-materials.cn.md](references/architecture-and-materials.cn.md) |
 | 成果访谈问题、结论措辞、bullet 草拟或最终简历文案审阅 | [references/interview-and-writing.cn.md](references/interview-and-writing.cn.md) |
 | 源文件创建、LaTeX 优先的 PDF 生产、编译、渲染或视觉 QA | [references/pdf-production.cn.md](references/pdf-production.cn.md) |
 | 紧凑中文技术简历排版，或用户提供的 PDF/TEX 排版样本需要指导最终 PDF | [references/layout-reference.cn.md](references/layout-reference.cn.md) |
 
-如果任务使用英文，按同一阶段读取对应英文文件：[SKILL.md](SKILL.md)、[references/workflow.md](references/workflow.md)、[references/interview-and-writing.md](references/interview-and-writing.md)、[references/pdf-production.md](references/pdf-production.md)、[references/layout-reference.md](references/layout-reference.md)。
+如果任务使用英文，按同一阶段读取对应英文文件。
 
 读完某份 reference 后，只应用当前阶段相关的指导，然后回到下面的必走流程。
 
@@ -37,7 +47,7 @@
 
 3. 建立证据包。
    - 每个项目记录定位、技术栈、核心模块、请求/数据流、技术亮点、实现细节和证据文件。
-   - 项目有足够内容时，包含项目索引、文件证据索引、项目证据卡、结论台账、成果追问队列和简历 bullet 候选池。
+   - 项目有足够内容时，包含 JSON 优先的 metadata 和产物：项目索引、文件证据索引、项目证据卡、结论台账、成果追问队列和简历 bullet 候选池。
    - 每条结论标记为 `Code evidence`、`Reasonable inference` 或 `Needs user confirmation`。
    - 职责、规模、上线使用、指标、业务价值、降本和性能提升，除非文档明确写出，否则都需要用户确认。
    - 把可复用项目素材和最终简历文案分开，方便生成多份不同方向的简历。
