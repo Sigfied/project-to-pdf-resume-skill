@@ -1,173 +1,148 @@
 ---
 title: Evidence Package Format
-description: Structured evidence artifacts, JSON metadata format, claim ledger, and completion rules.
+description: Markdown evidence documents plus JSON metadata and index files for agent-readable organization.
 lang: en
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Evidence Package Format
 
 Build the evidence package while reading code. The package is the source of truth for later resume bullets and PDF content.
 
-Prefer JSON for durable intermediate artifacts because it is easier for agents to inspect, diff, validate, and reuse across resume variants. A Markdown summary can be added for the user.
+Use **Markdown for detailed evidence descriptions** and **JSON for organization metadata**. Markdown keeps long reasoning, code observations, and user-readable notes easy to inspect. JSON tells agents where each Markdown document is, how claims connect to projects/files/questions/bullets, and which items are ready, pending, or rejected.
 
-## Package Files
+## Package Layout
 
 When writing artifacts to disk, use this layout unless the user requests another structure:
 
 ```text
 resume-evidence/
 ├── evidence-package.meta.json
-├── project-index.json
-├── file-evidence-index.json
-├── project-evidence-cards.json
-├── claim-ledger.json
-├── outcome-question-backlog.json
-├── resume-bullet-candidates.json
-└── summary.md
+├── evidence-package.index.json
+└── markdown/
+    ├── 00-intake-summary.md
+    ├── 01-project-index.md
+    ├── 02-file-evidence-index.md
+    ├── 03-project-evidence-cards.md
+    ├── 04-claim-ledger.md
+    ├── 05-outcome-question-backlog.md
+    └── 06-resume-bullet-candidates.md
 ```
 
-If the user did not ask for files, keep the same shapes in working notes.
+If the user did not ask for files, keep the same separation in working notes: Markdown-style evidence details, plus a compact JSON-like index for navigation.
 
 ## Metadata JSON
 
-Create `evidence-package.meta.json` to describe the artifact set:
+Create `evidence-package.meta.json` to describe the package itself:
 
 ```json
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "package_type": "project-to-pdf-resume.evidence-package",
   "created_at": "YYYY-MM-DDTHH:mm:ssZ",
+  "updated_at": "YYYY-MM-DDTHH:mm:ssZ",
   "language": "en",
   "target_role": "Backend Engineer",
   "target_seniority": "mid-senior",
+  "document_format": "markdown-plus-json-index",
   "source_project_count": 2,
-  "source_projects": [
-    {
-      "project_id": "project-a",
-      "display_name": "project-a",
-      "path_hint": "relative/path/or/user-label",
-      "type_hypothesis": "Go service",
-      "review_status": "in_progress"
-    }
-  ],
   "privacy": {
     "contains_private_source_paths": false,
     "contains_confidential_names": false,
     "requires_user_redaction_review": true
   },
-  "artifact_files": {
-    "project_index": "project-index.json",
-    "file_evidence_index": "file-evidence-index.json",
-    "project_evidence_cards": "project-evidence-cards.json",
-    "claim_ledger": "claim-ledger.json",
-    "outcome_question_backlog": "outcome-question-backlog.json",
-    "resume_bullet_candidates": "resume-bullet-candidates.json",
-    "summary": "summary.md"
-  }
+  "documents": [
+    {
+      "doc_id": "claim-ledger",
+      "kind": "claim_ledger",
+      "path": "markdown/04-claim-ledger.md",
+      "description": "Detailed claim table with evidence status and decisions."
+    }
+  ]
 }
 ```
 
 Use relative paths, project aliases, or user-approved labels. Do not write private absolute paths into reusable artifacts unless the user explicitly asks for local-only notes.
 
-## Artifact Schemas
+## Index JSON
 
-### `project-index.json`
-
-One object per folder or subproject:
+Create `evidence-package.index.json` as the agent-readable map across Markdown documents:
 
 ```json
-[
-  {
-    "track": "Backend",
-    "project_id": "project-a",
-    "display_name": "project-a",
-    "type_hypothesis": "Go service",
-    "target_role_fit": ["API", "storage", "async work"],
-    "high_signal_files": ["go.mod", "cmd/...", "internal/..."],
-    "review_status": "ready_for_evidence_card",
-    "notes": []
-  }
-]
-```
-
-### `file-evidence-index.json`
-
-Use this to make code reading auditable:
-
-```json
-[
-  {
-    "project_id": "project-a",
-    "file": "src/.../handler.ext",
-    "evidence_category": "entry_point",
-    "observed_detail": "Routes requests into service module.",
-    "why_it_matters": "Shows runtime responsibility boundary.",
-    "related_claim_ids": ["C-001"]
-  }
-]
-```
-
-### `project-evidence-cards.json`
-
-One compact card per resume-worthy project:
-
-```json
-[
-  {
-    "project_id": "project-a",
-    "project_purpose": "One sentence about the problem the code appears to solve.",
-    "architecture_flow": "API -> service -> repository -> storage",
-    "core_modules": [
-      {
-        "name": "service",
-        "responsibility": "Business orchestration"
+{
+  "schema_version": "1.1.0",
+  "projects": [
+    {
+      "project_id": "project-a",
+      "display_name": "project-a",
+      "track": "Backend",
+      "type_hypothesis": "Go service",
+      "review_status": "ready_for_evidence_card",
+      "markdown_ref": {
+        "path": "markdown/01-project-index.md",
+        "anchor": "project-a"
+      },
+      "evidence_card_ref": {
+        "path": "markdown/03-project-evidence-cards.md",
+        "anchor": "project-a"
+      },
+      "claim_ids": ["C-001", "C-002"]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C-001",
+      "project_id": "project-a",
+      "claim": "Service exposes request handling and delegates business logic.",
+      "evidence_status": "Code evidence",
+      "decision": "Use",
+      "confidence": "high",
+      "needs_confirmation": false,
+      "source_refs": [
+        {
+          "type": "file",
+          "path": "src/.../handler.ext",
+          "markdown_ref": {
+            "path": "markdown/02-file-evidence-index.md",
+            "anchor": "project-a-handler"
+          }
+        }
+      ],
+      "claim_markdown_ref": {
+        "path": "markdown/04-claim-ledger.md",
+        "anchor": "c-001"
       }
-    ],
-    "stack_in_use": [
-      {
-        "technology": "PostgreSQL",
-        "evidence": "repository/query module"
+    }
+  ],
+  "outcome_questions": [
+    {
+      "question_id": "Q-001",
+      "project_id": "project-a",
+      "priority": "high",
+      "related_claim_ids": ["C-002"],
+      "markdown_ref": {
+        "path": "markdown/05-outcome-question-backlog.md",
+        "anchor": "q-001"
       }
-    ],
-    "technical_highlights": ["transaction handling", "idempotent retry"],
-    "candidate_contribution": {
-      "status": "needs_user_confirmation",
-      "notes": ""
-    },
-    "confirmed_outcomes": [],
-    "unknowns": ["Was this deployed to production?"]
-  }
-]
+    }
+  ],
+  "bullet_candidates": [
+    {
+      "bullet_id": "B-001",
+      "project_id": "project-a",
+      "target_role": "Backend Engineer",
+      "source_claim_ids": ["C-001"],
+      "final_copy_ready": false,
+      "markdown_ref": {
+        "path": "markdown/06-resume-bullet-candidates.md",
+        "anchor": "b-001"
+      }
+    }
+  ]
+}
 ```
 
-### `claim-ledger.json`
-
-This is the main evidence table:
-
-```json
-[
-  {
-    "claim_id": "C-001",
-    "track": "Backend",
-    "project_id": "project-a",
-    "claim": "Service exposes request handling and delegates business logic.",
-    "evidence_status": "Code evidence",
-    "sources": [
-      {
-        "type": "file",
-        "path": "src/.../handler.ext",
-        "observed_detail": "Handler calls service layer."
-      }
-    ],
-    "resume_use": "bullet_technical_base",
-    "confidence": "high",
-    "needs_confirmation": false,
-    "follow_up_question": null,
-    "decision": "Use"
-  }
-]
-```
+Keep JSON values concise. Put detailed reasoning in Markdown, then link to it with `markdown_ref`.
 
 Allowed `evidence_status` values:
 
@@ -183,44 +158,127 @@ Allowed `decision` values:
 - `Hold`
 - `Reject`
 
-### `outcome-question-backlog.json`
+## Markdown Documents
+
+### `00-intake-summary.md`
+
+Include target role, target seniority, language, requested outputs, source folders, assumptions, and privacy notes.
+
+### `01-project-index.md`
+
+One section per folder or subproject:
+
+```markdown
+## project-a
+
+- Track: Backend
+- Type hypothesis: Go service
+- Target-role fit: API, storage, async work
+- High-signal files: `go.mod`, `cmd/...`, `internal/...`
+- Review status: ready for evidence card
+```
+
+### `02-file-evidence-index.md`
+
+Make code reading auditable:
+
+```markdown
+## project-a-handler
+
+- Project: project-a
+- File: `src/.../handler.ext`
+- Evidence category: entry point
+- Observed detail: Routes requests into service module.
+- Why it matters: Shows runtime responsibility boundary.
+- Related claims: C-001
+```
+
+### `03-project-evidence-cards.md`
+
+Create one card per resume-worthy project:
+
+```markdown
+## project-a
+
+### Project Purpose
+One sentence about the problem the code appears to solve.
+
+### Architecture Flow
+`API -> service -> repository -> storage`
+
+### Core Modules
+- `service`: business orchestration
+
+### Stack In Use
+- PostgreSQL: evidenced by repository/query module
+
+### Technical Highlights
+- transaction handling
+- idempotent retry
+
+### Candidate Contribution
+Needs user confirmation.
+
+### Confirmed Outcomes
+None yet.
+
+### Unknowns
+- Was this deployed to production?
+```
+
+### `04-claim-ledger.md`
+
+Use one section per claim. Keep the claim ID stable:
+
+```markdown
+## C-001
+
+- Project: project-a
+- Track: Backend
+- Claim: Service exposes request handling and delegates business logic.
+- Evidence status: Code evidence
+- Sources:
+  - `src/.../handler.ext`: Handler calls service layer.
+- Resume use: bullet technical base
+- Confidence: high
+- Needs confirmation: no
+- Decision: Use
+```
+
+### `05-outcome-question-backlog.md`
 
 Convert pending claims into targeted questions:
 
-```json
-[
-  {
-    "priority": "high",
-    "project_id": "project-a",
-    "question": "Did this run in production or support real users?",
-    "why_it_matters": "Separates demo code from delivered work.",
-    "unlocks": "production delivery bullet",
-    "related_claim_ids": ["C-002"]
-  }
-]
+```markdown
+## Q-001
+
+- Project: project-a
+- Priority: high
+- Question: Did this run in production or support real users?
+- Why it matters: Separates demo code from delivered work.
+- Unlocks: production delivery bullet
+- Related claims: C-002
 ```
 
-### `resume-bullet-candidates.json`
+### `06-resume-bullet-candidates.md`
 
 Draft bullets only after claims have source links:
 
-```json
-[
-  {
-    "target_role": "Backend Engineer",
-    "project_id": "project-a",
-    "draft_bullet": "Built a layered service flow covering request handling, business orchestration, and persistence.",
-    "source_claim_ids": ["C-001"],
-    "strength": "medium",
-    "blockers": ["needs confirmed outcome"],
-    "final_copy_ready": false
-  }
-]
+```markdown
+## B-001
+
+- Target role: Backend Engineer
+- Project: project-a
+- Draft bullet: Built a layered service flow covering request handling, business orchestration, and persistence.
+- Source claims: C-001
+- Strength: medium
+- Blockers: needs confirmed outcome
+- Final copy ready: false
 ```
 
 ## Compact Evidence Map
 
-For small projects or quick passes, a compact table can replace separate JSON files:
+For small projects or quick passes, a single Markdown table plus a tiny JSON index is enough:
 
 | Project | Evidence | Resume meaning | Status |
 | --- | --- | --- | --- |
@@ -234,6 +292,7 @@ For small projects or quick passes, a compact table can replace separate JSON fi
 The evidence package is ready for resume drafting when:
 
 - every final bullet candidate links to at least one claim ID
+- every claim ID has Markdown evidence details and JSON index metadata
 - every claim ID links to code, docs, reasonable inference, or user confirmation
 - all metrics, production usage, ownership level, scale, and business impact are user-confirmed or removed
 - assumptions are visible and do not appear as facts in final copy

@@ -27,7 +27,7 @@
 - 扫描一个或多个本地项目文件夹。
 - 在深入分析前，先判断主要工程类型。
 - 提取架构、实现细节、技术亮点和证据文件。
-- 建立 JSON 优先的证据包，包括 metadata、项目索引、文件证据索引、项目证据卡、结论台账、成果追问队列和 bullet 候选池。
+- 建立 Markdown + JSON 证据包：Markdown 保存详细证据，JSON 保存 metadata、文档索引、claim 关系、状态和可用性。
 - 将结论标记为 `Code evidence`、`Reasonable inference` 或 `Needs user confirmation`。
 - 针对上线使用、规模、职责、指标和成果提出聚焦问题。
 - 基于已验证证据草拟简历 bullet。

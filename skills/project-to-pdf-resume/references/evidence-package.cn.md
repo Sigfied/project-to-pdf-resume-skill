@@ -1,173 +1,148 @@
 ---
 title: 证据包格式
-description: 结构化证据产物、JSON metadata 格式、结论台账和完成标准。
+description: 使用 Markdown 存储详细证据描述，并用 JSON metadata 和 index 描述组织结构。
 lang: zh-CN
-version: 1.0.0
+version: 1.1.0
 ---
 
 # 证据包格式
 
 读代码时同步建立证据包。证据包是后续简历 bullet 和 PDF 内容的事实来源。
 
-中间产物优先使用 JSON，因为 agent 更容易检查、diff、校验和复用。可以额外为用户生成 Markdown 摘要。
+使用 **Markdown 保存详细证据描述**，使用 **JSON 保存组织结构 metadata**。Markdown 适合长推理、代码观察和用户可读笔记；JSON 告诉 agent 每份 Markdown 在哪里、结论如何关联项目/文件/问题/bullet，以及哪些条目可用、待确认或已拒绝。
 
-## 产物文件
+## 产物结构
 
 如果需要落盘，默认使用这个结构，除非用户指定其他形式：
 
 ```text
 resume-evidence/
 ├── evidence-package.meta.json
-├── project-index.json
-├── file-evidence-index.json
-├── project-evidence-cards.json
-├── claim-ledger.json
-├── outcome-question-backlog.json
-├── resume-bullet-candidates.json
-└── summary.md
+├── evidence-package.index.json
+└── markdown/
+    ├── 00-intake-summary.md
+    ├── 01-project-index.md
+    ├── 02-file-evidence-index.md
+    ├── 03-project-evidence-cards.md
+    ├── 04-claim-ledger.md
+    ├── 05-outcome-question-backlog.md
+    └── 06-resume-bullet-candidates.md
 ```
 
-如果用户没有要求写文件，也要在工作笔记中保持相同的数据形状。
+如果用户没有要求写文件，也要在工作笔记中保持同样的分离：Markdown 风格的详细证据，加一个紧凑的 JSON-like 索引用于导航。
 
 ## Metadata JSON
 
-创建 `evidence-package.meta.json` 描述整组产物：
+创建 `evidence-package.meta.json` 描述证据包本身：
 
 ```json
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "package_type": "project-to-pdf-resume.evidence-package",
   "created_at": "YYYY-MM-DDTHH:mm:ssZ",
+  "updated_at": "YYYY-MM-DDTHH:mm:ssZ",
   "language": "zh-CN",
   "target_role": "后端工程师",
   "target_seniority": "中高级",
+  "document_format": "markdown-plus-json-index",
   "source_project_count": 2,
-  "source_projects": [
-    {
-      "project_id": "project-a",
-      "display_name": "project-a",
-      "path_hint": "relative/path/or/user-label",
-      "type_hypothesis": "Go service",
-      "review_status": "in_progress"
-    }
-  ],
   "privacy": {
     "contains_private_source_paths": false,
     "contains_confidential_names": false,
     "requires_user_redaction_review": true
   },
-  "artifact_files": {
-    "project_index": "project-index.json",
-    "file_evidence_index": "file-evidence-index.json",
-    "project_evidence_cards": "project-evidence-cards.json",
-    "claim_ledger": "claim-ledger.json",
-    "outcome_question_backlog": "outcome-question-backlog.json",
-    "resume_bullet_candidates": "resume-bullet-candidates.json",
-    "summary": "summary.md"
-  }
+  "documents": [
+    {
+      "doc_id": "claim-ledger",
+      "kind": "claim_ledger",
+      "path": "markdown/04-claim-ledger.md",
+      "description": "Detailed claim table with evidence status and decisions."
+    }
+  ]
 }
 ```
 
 优先使用相对路径、项目别名或用户批准的标签。除非用户明确要求本地私有笔记，否则不要把私有绝对路径写入可复用产物。
 
-## 产物 Schema
+## Index JSON
 
-### `project-index.json`
-
-每个文件夹或子项目一个对象：
+创建 `evidence-package.index.json`，作为跨 Markdown 文档的 agent-readable map：
 
 ```json
-[
-  {
-    "track": "Backend",
-    "project_id": "project-a",
-    "display_name": "project-a",
-    "type_hypothesis": "Go service",
-    "target_role_fit": ["API", "storage", "async work"],
-    "high_signal_files": ["go.mod", "cmd/...", "internal/..."],
-    "review_status": "ready_for_evidence_card",
-    "notes": []
-  }
-]
-```
-
-### `file-evidence-index.json`
-
-让读代码过程可审计：
-
-```json
-[
-  {
-    "project_id": "project-a",
-    "file": "src/.../handler.ext",
-    "evidence_category": "entry_point",
-    "observed_detail": "Routes requests into service module.",
-    "why_it_matters": "Shows runtime responsibility boundary.",
-    "related_claim_ids": ["C-001"]
-  }
-]
-```
-
-### `project-evidence-cards.json`
-
-每个值得写进简历的项目一张卡：
-
-```json
-[
-  {
-    "project_id": "project-a",
-    "project_purpose": "一句话说明代码看起来解决的问题。",
-    "architecture_flow": "API -> service -> repository -> storage",
-    "core_modules": [
-      {
-        "name": "service",
-        "responsibility": "Business orchestration"
+{
+  "schema_version": "1.1.0",
+  "projects": [
+    {
+      "project_id": "project-a",
+      "display_name": "project-a",
+      "track": "Backend",
+      "type_hypothesis": "Go service",
+      "review_status": "ready_for_evidence_card",
+      "markdown_ref": {
+        "path": "markdown/01-project-index.md",
+        "anchor": "project-a"
+      },
+      "evidence_card_ref": {
+        "path": "markdown/03-project-evidence-cards.md",
+        "anchor": "project-a"
+      },
+      "claim_ids": ["C-001", "C-002"]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C-001",
+      "project_id": "project-a",
+      "claim": "Service exposes request handling and delegates business logic.",
+      "evidence_status": "Code evidence",
+      "decision": "Use",
+      "confidence": "high",
+      "needs_confirmation": false,
+      "source_refs": [
+        {
+          "type": "file",
+          "path": "src/.../handler.ext",
+          "markdown_ref": {
+            "path": "markdown/02-file-evidence-index.md",
+            "anchor": "project-a-handler"
+          }
+        }
+      ],
+      "claim_markdown_ref": {
+        "path": "markdown/04-claim-ledger.md",
+        "anchor": "c-001"
       }
-    ],
-    "stack_in_use": [
-      {
-        "technology": "PostgreSQL",
-        "evidence": "repository/query module"
+    }
+  ],
+  "outcome_questions": [
+    {
+      "question_id": "Q-001",
+      "project_id": "project-a",
+      "priority": "high",
+      "related_claim_ids": ["C-002"],
+      "markdown_ref": {
+        "path": "markdown/05-outcome-question-backlog.md",
+        "anchor": "q-001"
       }
-    ],
-    "technical_highlights": ["transaction handling", "idempotent retry"],
-    "candidate_contribution": {
-      "status": "needs_user_confirmation",
-      "notes": ""
-    },
-    "confirmed_outcomes": [],
-    "unknowns": ["是否上线到生产？"]
-  }
-]
+    }
+  ],
+  "bullet_candidates": [
+    {
+      "bullet_id": "B-001",
+      "project_id": "project-a",
+      "target_role": "Backend Engineer",
+      "source_claim_ids": ["C-001"],
+      "final_copy_ready": false,
+      "markdown_ref": {
+        "path": "markdown/06-resume-bullet-candidates.md",
+        "anchor": "b-001"
+      }
+    }
+  ]
+}
 ```
 
-### `claim-ledger.json`
-
-主证据表：
-
-```json
-[
-  {
-    "claim_id": "C-001",
-    "track": "Backend",
-    "project_id": "project-a",
-    "claim": "Service exposes request handling and delegates business logic.",
-    "evidence_status": "Code evidence",
-    "sources": [
-      {
-        "type": "file",
-        "path": "src/.../handler.ext",
-        "observed_detail": "Handler calls service layer."
-      }
-    ],
-    "resume_use": "bullet_technical_base",
-    "confidence": "high",
-    "needs_confirmation": false,
-    "follow_up_question": null,
-    "decision": "Use"
-  }
-]
-```
+JSON 值保持简短。详细推理写进 Markdown，再用 `markdown_ref` 链接过去。
 
 允许的 `evidence_status`：
 
@@ -183,44 +158,127 @@ resume-evidence/
 - `Hold`
 - `Reject`
 
-### `outcome-question-backlog.json`
+## Markdown 文档
+
+### `00-intake-summary.md`
+
+记录目标岗位、资历、语言、请求输出、源文件夹、假设和隐私说明。
+
+### `01-project-index.md`
+
+每个文件夹或子项目一个小节：
+
+```markdown
+## project-a
+
+- Track: Backend
+- Type hypothesis: Go service
+- Target-role fit: API, storage, async work
+- High-signal files: `go.mod`, `cmd/...`, `internal/...`
+- Review status: ready for evidence card
+```
+
+### `02-file-evidence-index.md`
+
+让读代码过程可审计：
+
+```markdown
+## project-a-handler
+
+- Project: project-a
+- File: `src/.../handler.ext`
+- Evidence category: entry point
+- Observed detail: Routes requests into service module.
+- Why it matters: Shows runtime responsibility boundary.
+- Related claims: C-001
+```
+
+### `03-project-evidence-cards.md`
+
+每个值得写进简历的项目一张卡：
+
+```markdown
+## project-a
+
+### Project Purpose
+一句话说明代码看起来解决的问题。
+
+### Architecture Flow
+`API -> service -> repository -> storage`
+
+### Core Modules
+- `service`: business orchestration
+
+### Stack In Use
+- PostgreSQL: evidenced by repository/query module
+
+### Technical Highlights
+- transaction handling
+- idempotent retry
+
+### Candidate Contribution
+Needs user confirmation.
+
+### Confirmed Outcomes
+None yet.
+
+### Unknowns
+- 是否上线到生产？
+```
+
+### `04-claim-ledger.md`
+
+每个 claim 一个小节，保持 claim ID 稳定：
+
+```markdown
+## C-001
+
+- Project: project-a
+- Track: Backend
+- Claim: Service exposes request handling and delegates business logic.
+- Evidence status: Code evidence
+- Sources:
+  - `src/.../handler.ext`: Handler calls service layer.
+- Resume use: bullet technical base
+- Confidence: high
+- Needs confirmation: no
+- Decision: Use
+```
+
+### `05-outcome-question-backlog.md`
 
 把待确认结论转换成聚焦问题：
 
-```json
-[
-  {
-    "priority": "high",
-    "project_id": "project-a",
-    "question": "是否上线或支持真实用户？",
-    "why_it_matters": "区分 demo 和真实交付。",
-    "unlocks": "production delivery bullet",
-    "related_claim_ids": ["C-002"]
-  }
-]
+```markdown
+## Q-001
+
+- Project: project-a
+- Priority: high
+- Question: Did this run in production or support real users?
+- Why it matters: Separates demo code from delivered work.
+- Unlocks: production delivery bullet
+- Related claims: C-002
 ```
 
-### `resume-bullet-candidates.json`
+### `06-resume-bullet-candidates.md`
 
 只有当 claim 已经有来源时，才开始起草 bullet：
 
-```json
-[
-  {
-    "target_role": "Backend Engineer",
-    "project_id": "project-a",
-    "draft_bullet": "Built a layered service flow covering request handling, business orchestration, and persistence.",
-    "source_claim_ids": ["C-001"],
-    "strength": "medium",
-    "blockers": ["needs confirmed outcome"],
-    "final_copy_ready": false
-  }
-]
+```markdown
+## B-001
+
+- Target role: Backend Engineer
+- Project: project-a
+- Draft bullet: Built a layered service flow covering request handling, business orchestration, and persistence.
+- Source claims: C-001
+- Strength: medium
+- Blockers: needs confirmed outcome
+- Final copy ready: false
 ```
 
 ## 小项目精简证据表
 
-小项目或快速分析时，可以用精简表替代分散 JSON 文件：
+小项目或快速分析时，一张 Markdown 表加一个很小的 JSON index 就足够：
 
 | 项目 | 证据 | 简历含义 | 状态 |
 | --- | --- | --- | --- |
@@ -234,6 +292,7 @@ resume-evidence/
 证据包满足这些条件后，才足够进入简历草稿：
 
 - 每条最终 bullet 候选至少关联一个 claim ID
+- 每个 claim ID 都有 Markdown 证据详情和 JSON 索引元数据
 - 每个 claim ID 都能追溯到代码、文档、合理推断或用户确认
 - 指标、上线使用、职责范围、规模和业务影响已由用户确认，或从最终文案移除
 - 假设保持可见，但不会在最终简历中伪装成事实

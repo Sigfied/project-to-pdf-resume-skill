@@ -16,7 +16,7 @@ version: 1.0.0
 | 输入确认 | 确认项目文件夹、目标岗位、语言、输出形式和假设。 | [intake-and-scan.cn.md](intake-and-scan.cn.md) |
 | 工程类型扫描 | 深入阅读前，先判断主要文件类型和 manifest。 | [intake-and-scan.cn.md](intake-and-scan.cn.md) |
 | 代码盘点 | 按工程类型阅读高信号文件。 | [intake-and-scan.cn.md](intake-and-scan.cn.md) |
-| 证据包 | 产出结构化证据材料和 JSON metadata。 | [evidence-package.cn.md](evidence-package.cn.md) |
+| 证据包 | 产出 Markdown 证据文档和 JSON metadata/index 文件。 | [evidence-package.cn.md](evidence-package.cn.md) |
 | 架构综合 | 总结项目目的、组件流、技术亮点和岗位匹配。 | [architecture-and-materials.cn.md](architecture-and-materials.cn.md) |
 | 成果访谈 | 只追问缺失的上线、规模、职责、指标或影响事实。 | [interview-and-writing.cn.md](interview-and-writing.cn.md) |
 | 简历写作 | 把已验证结论转换成面向岗位的 bullet。 | [interview-and-writing.cn.md](interview-and-writing.cn.md) |
@@ -33,7 +33,7 @@ version: 1.0.0
 | --- | --- | --- |
 | 输入摘要 | 记录文件夹、目标岗位、简历语言、输出形式和假设。 | Markdown 或 JSON object |
 | 项目扫描 | 记录工程类型假设和高信号文件。 | Markdown table 或 JSON array |
-| 证据包 | 把结论关联到文件、推断状态、追问和 bullet 候选。 | JSON 优先，可附 Markdown 摘要 |
+| 证据包 | 把结论关联到文件、推断状态、追问和 bullet 候选。 | Markdown 详情 + JSON metadata/index |
 | 架构笔记 | 解释运行流、模块边界、实际技术栈和亮点。 | Markdown |
 | 成果问题 | 聚焦会增强最终 bullet 的用户确认事实。 | Markdown list 或 JSON array |
 | 简历 bullet | 把已验证证据转成简洁的岗位定向表述。 | Markdown |

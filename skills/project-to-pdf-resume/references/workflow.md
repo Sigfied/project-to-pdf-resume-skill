@@ -16,7 +16,7 @@ Use this file as the workflow router, not as the only reference. Load each deepe
 | Intake | Confirm folders, target role, language, output type, and assumptions. | [intake-and-scan.md](intake-and-scan.md) |
 | Project type scan | Identify dominant file types and manifests before deep reading. | [intake-and-scan.md](intake-and-scan.md) |
 | Code inventory | Read high-signal files by project type. | [intake-and-scan.md](intake-and-scan.md) |
-| Evidence package | Produce structured evidence artifacts and JSON metadata. | [evidence-package.md](evidence-package.md) |
+| Evidence package | Produce Markdown evidence documents plus JSON metadata/index files. | [evidence-package.md](evidence-package.md) |
 | Architecture synthesis | Summarize project purpose, component flow, technical highlights, and role fit. | [architecture-and-materials.md](architecture-and-materials.md) |
 | Outcome interview | Ask only for missing production, scale, ownership, metric, or impact facts. | [interview-and-writing.md](interview-and-writing.md) |
 | Resume writing | Convert verified claims into target-role bullets. | [interview-and-writing.md](interview-and-writing.md) |
@@ -33,7 +33,7 @@ Produce only the artifacts needed for the user's requested output, but keep inte
 | --- | --- | --- |
 | Intake summary | Records folders, target role, resume language, output type, assumptions. | Markdown or JSON object |
 | Project scan | Captures project type hypothesis and high-signal files. | Markdown table or JSON array |
-| Evidence package | Links claims to files, inference status, questions, and bullet candidates. | JSON-first, Markdown summary optional |
+| Evidence package | Links claims to files, inference status, questions, and bullet candidates. | Markdown details plus JSON metadata/index |
 | Architecture notes | Explains runtime flow, module boundaries, stack-in-use, and highlights. | Markdown |
 | Outcome questions | Focuses user confirmation on facts that can improve final bullets. | Markdown list or JSON array |
 | Resume bullets | Converts verified evidence into concise role-targeted statements. | Markdown |

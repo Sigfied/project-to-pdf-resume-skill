@@ -21,7 +21,7 @@ version: 1.0.0
 | --- | --- |
 | 阶段路由、产物概览或停止条件 | [references/workflow.cn.md](references/workflow.cn.md) |
 | 输入确认、工程类型扫描、代码盘点或第一轮证据目录 | [references/intake-and-scan.cn.md](references/intake-and-scan.cn.md) |
-| 证据包产物、JSON metadata、结论台账 schema 或追溯规则 | [references/evidence-package.cn.md](references/evidence-package.cn.md) |
+| 证据包产物、Markdown 证据文档、JSON metadata/index、结论台账 schema 或追溯规则 | [references/evidence-package.cn.md](references/evidence-package.cn.md) |
 | 架构综合、目标岗位方向选择、材料组织或草稿门槛 | [references/architecture-and-materials.cn.md](references/architecture-and-materials.cn.md) |
 | 成果访谈问题、结论措辞、bullet 草拟或最终简历文案审阅 | [references/interview-and-writing.cn.md](references/interview-and-writing.cn.md) |
 | 源文件创建、LaTeX 优先的 PDF 生产、编译、渲染或视觉 QA | [references/pdf-production.cn.md](references/pdf-production.cn.md) |
@@ -47,7 +47,7 @@ version: 1.0.0
 
 3. 建立证据包。
    - 每个项目记录定位、技术栈、核心模块、请求/数据流、技术亮点、实现细节和证据文件。
-   - 项目有足够内容时，包含 JSON 优先的 metadata 和产物：项目索引、文件证据索引、项目证据卡、结论台账、成果追问队列和简历 bullet 候选池。
+   - 项目有足够内容时，用 Markdown 保存详细证据描述，用 JSON 保存 metadata/index：项目索引、文件证据索引、项目证据卡、结论台账、成果追问队列和简历 bullet 候选池。
    - 每条结论标记为 `Code evidence`、`Reasonable inference` 或 `Needs user confirmation`。
    - 职责、规模、上线使用、指标、业务价值、降本和性能提升，除非文档明确写出，否则都需要用户确认。
    - 把可复用项目素材和最终简历文案分开，方便生成多份不同方向的简历。

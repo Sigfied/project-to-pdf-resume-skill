@@ -19,7 +19,7 @@ Start with this `SKILL.md` only. Load bundled references only when the current t
 | --- | --- |
 | Stage routing, deliverable overview, or stop conditions | [references/workflow.md](references/workflow.md) |
 | Intake, project type scanning, code inventory, or first evidence directory | [references/intake-and-scan.md](references/intake-and-scan.md) |
-| Evidence package artifacts, JSON metadata, claim ledger schema, or traceability rules | [references/evidence-package.md](references/evidence-package.md) |
+| Evidence package artifacts, Markdown evidence docs, JSON metadata/index, claim ledger schema, or traceability rules | [references/evidence-package.md](references/evidence-package.md) |
 | Architecture synthesis, target-role track selection, material organization, or draft gates | [references/architecture-and-materials.md](references/architecture-and-materials.md) |
 | Outcome interview questions, claim wording, bullet drafting, or final resume copy review | [references/interview-and-writing.md](references/interview-and-writing.md) |
 | Source document creation, LaTeX-first PDF production, compilation, rendering, or visual QA | [references/pdf-production.md](references/pdf-production.md) |
@@ -45,7 +45,7 @@ After reading a reference, apply only the guidance relevant to the current stage
 
 3. Build an evidence package.
    - For every project, record role positioning, stack, core modules, request/data flow, technical highlights, implementation details, and evidence files.
-   - Include JSON-first metadata and artifacts: project index, file evidence index, project evidence card, claim ledger, outcome question backlog, and resume bullet candidate pool when the project has enough substance.
+   - Use Markdown for detailed evidence descriptions and JSON for package metadata/indexes: project index, file evidence index, project evidence card, claim ledger, outcome question backlog, and resume bullet candidate pool when the project has enough substance.
    - Label each claim as `Code evidence`, `Reasonable inference`, or `Needs user confirmation`.
    - Treat ownership, scale, production usage, metrics, business value, cost savings, and performance gains as `Needs user confirmation` unless they are explicitly documented.
    - Separate reusable project notes from final resume copy so the same evidence can support multiple role-specific resumes.

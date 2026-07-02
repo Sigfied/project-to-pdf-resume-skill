@@ -27,7 +27,7 @@ The final workflow is designed to produce:
 - Scans one or more local project folders.
 - Detects the dominant project type before deep analysis.
 - Extracts architecture, implementation details, technical highlights, and evidence files.
-- Builds a JSON-first evidence package with metadata, project indexes, file evidence indexes, project evidence cards, claim ledgers, outcome question backlogs, and bullet candidates.
+- Builds a Markdown + JSON evidence package: Markdown stores detailed evidence, while JSON stores metadata, document indexes, claim links, statuses, and readiness.
 - Labels claims as `Code evidence`, `Reasonable inference`, or `Needs user confirmation`.
 - Asks targeted questions about production usage, scale, responsibility, metrics, and outcomes.
 - Drafts resume bullets from verified evidence.
