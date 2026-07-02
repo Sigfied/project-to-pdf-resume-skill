@@ -1,5 +1,7 @@
 # Project To PDF Resume Skill
 
+[English](#project-to-pdf-resume-skill) | [简体中文](#project-to-pdf-resume-skill-中文说明)
+
 An evidence-first Agent Skill for turning local project folders into technical resume material, LaTeX-based resume sources, and verified PDF resumes.
 
 The Skill is designed for resume workflows where an agent must inspect code before writing, separate code-backed facts from user-confirmed outcomes, and avoid inventing metrics, ownership, production usage, or business impact.
@@ -171,6 +173,8 @@ MIT License. See [LICENSE](LICENSE).
 ---
 
 # Project To PDF Resume Skill 中文说明
+
+[English](#project-to-pdf-resume-skill) | [简体中文](#project-to-pdf-resume-skill-中文说明)
 
 这是一个标准 Agent Skill，用于把本地项目文件夹整理成技术简历素材、LaTeX 简历源文件和经过校验的 PDF 简历。
 
