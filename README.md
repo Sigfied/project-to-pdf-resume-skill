@@ -6,6 +6,20 @@ The Skill is designed for resume workflows where an agent must inspect code befo
 
 This repository uses the standard Skill shape: an installable directory containing `SKILL.md` with YAML frontmatter, plus optional bundled reference files. It is not tied to one specific agent runtime.
 
+## About
+
+`project-to-pdf-resume` is a portable Agent Skill for building technical resumes from real project repositories. It guides an AI agent through a disciplined workflow: inspect the code first, identify the project type, collect evidence, ask the user only for missing outcomes, draft resume bullets, and produce a verified PDF when requested.
+
+The Skill is useful when resume content must be grounded in source code rather than memory or guesswork. It treats architecture, implementation details, file evidence, and technical highlights as code-backed facts, while requiring user confirmation for production usage, ownership, scale, metrics, business value, and launch outcomes.
+
+The final workflow is designed to produce:
+
+- an evidence package with project indexes, file evidence indexes, project evidence cards, claim ledgers, outcome questions, and bullet candidates
+- role-targeted resume bullets that separate verified facts from assumptions
+- LaTeX-first resume source when PDF output is requested
+- rendered PDF verification guidance for page count, spacing, overflow, and readability
+- English and Simplified Chinese documentation for the full workflow
+
 ## What It Does
 
 - Scans one or more local project folders.
@@ -163,6 +177,20 @@ MIT License. See [LICENSE](LICENSE).
 它强调先读代码，再写简历：架构、功能、技术栈和实现细节来自代码证据；上线效果、规模、职责、指标和业务价值必须由用户确认。
 
 仓库采用通用 Skill 结构：可安装目录中包含 `SKILL.md` 和 `references/`，不绑定某一个 agent 运行时。
+
+## 关于项目
+
+`project-to-pdf-resume` 是一个可移植的 Agent Skill，用来从真实项目仓库生成技术简历材料。它要求 agent 先阅读代码、判断工程类型、建立证据包，再向用户追问缺失的上线效果，最后整理成面向岗位的简历 bullet，并在需要时生成经过校验的 PDF。
+
+它适合那些不能凭印象写简历、必须从代码和项目产物中提取可信材料的场景。架构、实现细节、技术栈和亮点来自代码证据；上线情况、职责范围、指标、规模和业务价值必须由用户确认。
+
+核心产物包括：
+
+- 项目索引、文件证据索引、项目证据卡、结论台账、成果追问队列和 bullet 候选池
+- 区分事实、推断和待确认内容的岗位定向简历 bullet
+- 优先使用 LaTeX 的简历源文件
+- PDF 页数、间距、溢出和可读性校验流程
+- 英文和简体中文两套对应文档
 
 ## 安装
 
