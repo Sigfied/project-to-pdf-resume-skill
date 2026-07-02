@@ -11,6 +11,21 @@ Create a technical resume from local project folders without inventing impact. U
 
 The default output is an evidence-backed resume package: project evidence notes, a claim ledger, outcome questions, polished bullets, source document updates, and a verified PDF when requested.
 
+## Progressive Reference Loading
+
+Start with this `SKILL.md` only. Load bundled references only when the current task reaches the stage that needs that detail; do not preload every reference at the start.
+
+| When the task needs... | Read this reference |
+| --- | --- |
+| Full end-to-end execution, project type scanning, architecture analysis, evidence package structure, or multi-folder organization | [references/workflow.md](references/workflow.md) |
+| Outcome interview questions, claim wording, bullet drafting, or final resume copy review | [references/interview-and-writing.md](references/interview-and-writing.md) |
+| Source document creation, LaTeX-first PDF production, compilation, rendering, or visual QA | [references/pdf-production.md](references/pdf-production.md) |
+| Compact Chinese technical resume layout, or a user-provided PDF/TEX layout sample that should guide the final PDF | [references/layout-reference.md](references/layout-reference.md) |
+
+For Simplified Chinese work, load the matching `.cn.md` counterpart at the same stage: [SKILL.cn.md](SKILL.cn.md), [references/workflow.cn.md](references/workflow.cn.md), [references/interview-and-writing.cn.md](references/interview-and-writing.cn.md), [references/pdf-production.cn.md](references/pdf-production.cn.md), or [references/layout-reference.cn.md](references/layout-reference.cn.md).
+
+After reading a reference, apply only the guidance relevant to the current stage, then return to the required flow below.
+
 ## Required Flow
 
 1. Confirm inputs and target.
@@ -49,21 +64,6 @@ The default output is an evidence-backed resume package: project evidence notes,
    - Reuse an existing non-LaTeX source only when it is already the user's canonical resume workflow or the user requests that format.
    - Generate or update the source document, compile/render the PDF, inspect page count, render pages to images when possible, and check spacing, overflow, section balance, and font rendering.
    - Iterate until the PDF is readable, compact, and truthful.
-
-## References
-
-- Read [references/workflow.md](references/workflow.md) for the complete evidence-first workflow.
-- Read [references/interview-and-writing.md](references/interview-and-writing.md) before asking outcome questions or writing final bullets.
-- Read [references/pdf-production.md](references/pdf-production.md) before creating, compiling, or verifying PDF output.
-- Read [references/layout-reference.md](references/layout-reference.md) when a compact Chinese technical resume layout or user-provided PDF/TEX layout sample should guide the final PDF.
-
-Simplified Chinese counterparts:
-
-- [SKILL.cn.md](SKILL.cn.md)
-- [references/workflow.cn.md](references/workflow.cn.md)
-- [references/interview-and-writing.cn.md](references/interview-and-writing.cn.md)
-- [references/pdf-production.cn.md](references/pdf-production.cn.md)
-- [references/layout-reference.cn.md](references/layout-reference.cn.md)
 
 ## Rules
 

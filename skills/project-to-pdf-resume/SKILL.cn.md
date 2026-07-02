@@ -6,6 +6,21 @@
 
 默认产出是一组可追溯的简历材料：项目证据笔记、结论台账、成果追问清单、打磨后的简历 bullet、源文件更新，以及在需要时生成并校验过的 PDF。
 
+## 渐进式参考加载
+
+先只阅读本 `SKILL.cn.md`。只有当前任务进入需要更多细节的阶段时，才加载对应 reference；不要一开始就把所有 reference 全部读入上下文。
+
+| 当前任务需要... | 读取这份 reference |
+| --- | --- |
+| 完整端到端执行、工程类型扫描、架构分析、证据包结构或多项目组织 | [references/workflow.cn.md](references/workflow.cn.md) |
+| 成果访谈问题、结论措辞、bullet 草拟或最终简历文案审阅 | [references/interview-and-writing.cn.md](references/interview-and-writing.cn.md) |
+| 源文件创建、LaTeX 优先的 PDF 生产、编译、渲染或视觉 QA | [references/pdf-production.cn.md](references/pdf-production.cn.md) |
+| 紧凑中文技术简历排版，或用户提供的 PDF/TEX 排版样本需要指导最终 PDF | [references/layout-reference.cn.md](references/layout-reference.cn.md) |
+
+如果任务使用英文，按同一阶段读取对应英文文件：[SKILL.md](SKILL.md)、[references/workflow.md](references/workflow.md)、[references/interview-and-writing.md](references/interview-and-writing.md)、[references/pdf-production.md](references/pdf-production.md)、[references/layout-reference.md](references/layout-reference.md)。
+
+读完某份 reference 后，只应用当前阶段相关的指导，然后回到下面的必走流程。
+
 ## 必走流程
 
 1. 确认输入和目标。
@@ -44,17 +59,6 @@
    - 只有已有非 LaTeX 源文件已经是用户的标准简历流程，或用户明确要求该格式时，才优先沿用非 LaTeX。
    - 更新源文件，编译或渲染 PDF，检查页数；条件允许时把页面渲染成图片，检查间距、溢出、版面平衡和字体。
    - 反复迭代，直到 PDF 可读、紧凑且事实可靠。
-
-## 参考文档
-
-- 英文流程：[references/workflow.md](references/workflow.md)
-- 中文流程：[references/workflow.cn.md](references/workflow.cn.md)
-- 英文访谈与写作：[references/interview-and-writing.md](references/interview-and-writing.md)
-- 中文访谈与写作：[references/interview-and-writing.cn.md](references/interview-and-writing.cn.md)
-- 英文 PDF 生产：[references/pdf-production.md](references/pdf-production.md)
-- 中文 PDF 生产：[references/pdf-production.cn.md](references/pdf-production.cn.md)
-- 英文排版参考：[references/layout-reference.md](references/layout-reference.md)
-- 中文排版参考：[references/layout-reference.cn.md](references/layout-reference.cn.md)
 
 ## 规则
 
