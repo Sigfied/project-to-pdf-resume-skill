@@ -1,6 +1,6 @@
 # Project To PDF Resume Skill
 
-[English](#project-to-pdf-resume-skill) | [简体中文](#project-to-pdf-resume-skill-中文说明)
+[English](README.md) | [简体中文](README.zh-CN.md)
 
 An evidence-first Agent Skill for turning local project folders into technical resume material, LaTeX-based resume sources, and verified PDF resumes.
 
@@ -40,6 +40,7 @@ The final workflow is designed to produce:
 ```text
 .
 ├── README.md
+├── README.zh-CN.md
 ├── LICENSE
 ├── .gitignore
 └── skills/
@@ -169,56 +170,3 @@ Each primary Skill document has a Simplified Chinese counterpart:
 ## License
 
 MIT License. See [LICENSE](LICENSE).
-
----
-
-# Project To PDF Resume Skill 中文说明
-
-[English](#project-to-pdf-resume-skill) | [简体中文](#project-to-pdf-resume-skill-中文说明)
-
-这是一个标准 Agent Skill，用于把本地项目文件夹整理成技术简历素材、LaTeX 简历源文件和经过校验的 PDF 简历。
-
-它强调先读代码，再写简历：架构、功能、技术栈和实现细节来自代码证据；上线效果、规模、职责、指标和业务价值必须由用户确认。
-
-仓库采用通用 Skill 结构：可安装目录中包含 `SKILL.md` 和 `references/`，不绑定某一个 agent 运行时。
-
-## 关于项目
-
-`project-to-pdf-resume` 是一个可移植的 Agent Skill，用来从真实项目仓库生成技术简历材料。它要求 agent 先阅读代码、判断工程类型、建立证据包，再向用户追问缺失的上线效果，最后整理成面向岗位的简历 bullet，并在需要时生成经过校验的 PDF。
-
-它适合那些不能凭印象写简历、必须从代码和项目产物中提取可信材料的场景。架构、实现细节、技术栈和亮点来自代码证据；上线情况、职责范围、指标、规模和业务价值必须由用户确认。
-
-核心产物包括：
-
-- 项目索引、文件证据索引、项目证据卡、结论台账、成果追问队列和 bullet 候选池
-- 区分事实、推断和待确认内容的岗位定向简历 bullet
-- 优先使用 LaTeX 的简历源文件
-- PDF 页数、间距、溢出和可读性校验流程
-- 英文和简体中文两套对应文档
-
-## 安装
-
-```bash
-git clone https://github.com/Sigfied/project-to-pdf-resume-skill.git
-mkdir -p /path/to/your/skills
-cp -R project-to-pdf-resume-skill/skills/project-to-pdf-resume /path/to/your/skills/
-```
-
-关键是复制整个包含 `SKILL.md` 的目录，而不是只复制单个文件。
-
-Codex 风格的本地安装示例：
-
-```bash
-mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
-cp -R project-to-pdf-resume-skill/skills/project-to-pdf-resume "${CODEX_HOME:-$HOME/.codex}/skills/"
-```
-
-然后重启 agent、重新加载 skills，或按你的运行时要求触发发现流程。
-
-## 使用
-
-```text
-使用 project-to-pdf-resume skill，分析这些项目文件夹，先读代码，再问我缺失的上线效果，最后整理成简历描述并生成 PDF。
-```
-
-默认会优先使用 LaTeX 做最终 PDF 排版；只有在用户明确要求其他格式，或已有非 LaTeX 源文件是权威简历流程时，才使用其他格式。
