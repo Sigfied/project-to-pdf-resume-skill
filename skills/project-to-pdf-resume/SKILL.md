@@ -54,6 +54,7 @@ The default output is an evidence-backed resume package: project evidence notes,
 - Read [references/workflow.md](references/workflow.md) for the complete evidence-first workflow.
 - Read [references/interview-and-writing.md](references/interview-and-writing.md) before asking outcome questions or writing final bullets.
 - Read [references/pdf-production.md](references/pdf-production.md) before creating, compiling, or verifying PDF output.
+- Read [references/layout-reference.md](references/layout-reference.md) when a compact Chinese technical resume layout or user-provided PDF/TEX layout sample should guide the final PDF.
 
 Simplified Chinese counterparts:
 
@@ -61,6 +62,7 @@ Simplified Chinese counterparts:
 - [references/workflow.cn.md](references/workflow.cn.md)
 - [references/interview-and-writing.cn.md](references/interview-and-writing.cn.md)
 - [references/pdf-production.cn.md](references/pdf-production.cn.md)
+- [references/layout-reference.cn.md](references/layout-reference.cn.md)
 
 ## Rules
 

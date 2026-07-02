@@ -46,6 +46,10 @@ Use another format when:
 
 When using LaTeX, prefer a compact resume template with semantic sections, reusable commands, consistent list spacing, and explicit font support for the resume language.
 
+When the user provides existing resume PDFs or TEX sources as layout references, inspect them before changing layout. Extract reusable layout rules only: page size, margins, font scale, section hierarchy, list spacing, project heading structure, page-break strategy, and visual density. Do not copy private content from the samples into reusable Skill documentation.
+
+For a compact Chinese technical resume style, read [layout-reference.md](layout-reference.md).
+
 ## Source Rules
 
 - Use a LaTeX engine and template that support the resume language; for CJK resumes, prefer XeLaTeX/LuaLaTeX-compatible font handling when available.

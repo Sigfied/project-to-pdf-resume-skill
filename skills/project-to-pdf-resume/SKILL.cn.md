@@ -52,6 +52,8 @@
 - 中文访谈与写作：[references/interview-and-writing.cn.md](references/interview-and-writing.cn.md)
 - 英文 PDF 生产：[references/pdf-production.md](references/pdf-production.md)
 - 中文 PDF 生产：[references/pdf-production.cn.md](references/pdf-production.cn.md)
+- 英文排版参考：[references/layout-reference.md](references/layout-reference.md)
+- 中文排版参考：[references/layout-reference.cn.md](references/layout-reference.cn.md)
 
 ## 规则
 

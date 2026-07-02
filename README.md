@@ -13,6 +13,7 @@ The Skill is designed for resume workflows where an agent must inspect code befo
 - Asks targeted questions about production usage, scale, responsibility, metrics, and outcomes.
 - Drafts resume bullets from verified evidence.
 - Prefers LaTeX for final PDF typesetting and requires rendered PDF verification.
+- Includes compact LaTeX layout guidance for Chinese technical resumes and user-provided PDF/TEX layout samples.
 - Includes matching Simplified Chinese documentation for each Skill document.
 
 ## Repository Layout
@@ -33,6 +34,8 @@ The Skill is designed for resume workflows where an agent must inspect code befo
             ├── workflow.cn.md
             ├── interview-and-writing.md
             ├── interview-and-writing.cn.md
+            ├── layout-reference.md
+            ├── layout-reference.cn.md
             ├── pdf-production.md
             └── pdf-production.cn.md
 ```
@@ -128,6 +131,7 @@ Each primary Skill document has a Simplified Chinese counterpart:
 - `SKILL.md` -> `SKILL.cn.md`
 - `workflow.md` -> `workflow.cn.md`
 - `interview-and-writing.md` -> `interview-and-writing.cn.md`
+- `layout-reference.md` -> `layout-reference.cn.md`
 - `pdf-production.md` -> `pdf-production.cn.md`
 
 ## License
