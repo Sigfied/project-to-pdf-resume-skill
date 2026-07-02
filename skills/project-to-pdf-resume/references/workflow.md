@@ -9,7 +9,7 @@ Produce these artifacts as the task requires:
 | Artifact | Purpose |
 | --- | --- |
 | Intake summary | Records project folders, target role, resume language, output type, and assumptions. |
-| Evidence map | Links each resume claim to code, docs, inference, or user confirmation. |
+| Evidence package | Links each resume claim to code, docs, inference, user confirmation, follow-up questions, and draft bullet candidates. |
 | Architecture notes | Describes component boundaries, request/data flow, storage, async work, and operational mechanisms. |
 | Outcome questions | Asks only for missing facts that materially improve the resume. |
 | Resume bullets | Converts verified evidence into concise role-targeted statements. |
@@ -94,9 +94,115 @@ Create a short evidence directory before detailed writing:
 
 Do not treat dependency presence as skill mastery by itself. A dependency becomes resume-worthy only when the code shows how it is used.
 
-## 5. Evidence Map
+## 5. Evidence Package
 
-Maintain a compact table while reading:
+Build a reusable evidence package while reading the project. The package should be detailed enough that another agent can trace every final resume bullet back to source material, while still being compact enough for the user to review.
+
+Produce these working artifacts when the project has enough substance:
+
+| Artifact | Required contents | Purpose |
+| --- | --- | --- |
+| `project-index` | track, project folder/name, project type hypothesis, target role fit, high-signal files, review status | Keeps multiple folders and resume tracks organized. |
+| `file-evidence-index` | relative path, evidence category, observed detail, why it matters, related claim IDs | Prevents vague claims by tying observations to concrete files. |
+| `project-evidence-card` | problem, architecture flow, core modules, stack-in-use, reliability/performance mechanisms, candidate contribution, confirmed outcomes, unknowns | Gives each project a compact technical narrative before resume writing. |
+| `claim-ledger` | claim, evidence status, source, confidence, resume wording, follow-up question, final decision | Tracks which claims are safe, cautious, pending, or rejected. |
+| `outcome-question-backlog` | question, why it matters, possible bullet unlocked, priority | Turns missing production/business facts into focused user questions. |
+| `resume-bullet-candidates` | draft bullet, source claims, target role, strength, blockers | Separates evidence collection from final copywriting. |
+
+### Project Index
+
+Use one row per folder or subproject:
+
+| Track | Project | Type hypothesis | Target-role fit | High-signal files | Status |
+| --- | --- | --- | --- | --- | --- |
+| Backend | project-a | Go service | API, storage, async work | `go.mod`, `cmd/...`, `internal/...` | Ready for evidence card |
+| Data | project-b | Python pipeline | ingestion, transform, orchestration | `pyproject.toml`, `jobs/...`, `models/...` | Needs more source review |
+
+Keep type hypotheses provisional until architecture evidence confirms them.
+
+### File Evidence Index
+
+Use this index to make code reading auditable:
+
+| Project | File | Evidence category | Observed detail | Why it matters | Claim ID |
+| --- | --- | --- | --- | --- | --- |
+| project-a | `src/.../handler.ext` | Entry point | Routes requests into service module | Shows runtime responsibility boundary | C-001 |
+| project-a | `src/.../repository.ext` | Data access | Encapsulates storage queries | Supports persistence and layering claim | C-002 |
+| project-b | `jobs/.../transform.ext` | Data flow | Validates and transforms input records | Supports pipeline implementation claim | C-003 |
+
+Prefer relative paths and short observed details. Avoid absolute local paths in reusable materials.
+
+### Project Evidence Card
+
+Create one compact card per resume-worthy project:
+
+| Field | What to write |
+| --- | --- |
+| Project purpose | One sentence about the problem the code appears to solve. |
+| Architecture flow | One line such as `API -> service -> repository -> storage` or `source -> validation -> transform -> sink`. |
+| Core modules | Main folders/classes/functions and their responsibilities. |
+| Stack in use | Technologies with actual usage evidence, not just dependencies. |
+| Technical highlights | Reliability, performance, concurrency, data quality, security, tooling, or maintainability mechanisms visible in code. |
+| Candidate contribution | Ownership level or likely contribution. Mark as pending unless the user confirms it. |
+| Confirmed outcomes | Metrics, production status, user impact, adoption, savings, or delivery result confirmed by the user. |
+| Unknowns | Open questions that would materially improve the resume. |
+
+### Claim Ledger
+
+Maintain a claim ledger as the main evidence table:
+
+| Track | Project | Claim ID | Claim | Evidence status | Source | Observed detail | Resume use | Confidence | Needs confirmation | Follow-up | Decision |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Backend | project-a | C-001 | Service exposes request handling and delegates business logic | Code evidence | `src/.../handler.ext` | Handler calls service layer | Bullet technical base | High | No | - | Use |
+| Backend | project-a | C-002 | Project improved latency or throughput | Needs user confirmation | user interview | Metric not visible in code | Outcome bullet | Low | Yes | What changed after launch? | Pending |
+| Data | project-b | C-003 | Pipeline validates input before transformation | Code evidence | `jobs/.../transform.ext` | Validation happens before transform | Bullet technical base | Medium | No | - | Use cautiously |
+
+Use consistent decisions:
+
+- `Use`: safe to include in final resume wording.
+- `Use cautiously`: include only with conservative phrasing.
+- `Ask user`: needs outcome, ownership, production, or scale confirmation.
+- `Hold`: keep in notes but do not use yet.
+- `Reject`: remove from final resume because evidence is weak or irrelevant.
+
+### Outcome Question Backlog
+
+Convert pending claims into targeted questions:
+
+| Priority | Project | Question | Why it matters | Bullet unlocked |
+| --- | --- | --- | --- | --- |
+| High | project-a | Did this run in production or support real users? | Separates demo code from delivered work. | Production delivery bullet |
+| High | project-a | Is there a measurable before/after result? | Converts implementation into impact. | Metric-backed achievement |
+| Medium | project-b | What data volume or schedule did it handle? | Adds scale and operational context. | Data pipeline scale bullet |
+
+Ask only questions that can change final resume wording. Do not ask broad curiosity questions during the resume pass.
+
+### Resume Bullet Candidate Pool
+
+Draft bullets only after claims have source links:
+
+| Target role | Project | Draft bullet | Source claims | Strength | Blockers |
+| --- | --- | --- | --- | --- | --- |
+| Backend | project-a | Built a layered service flow covering request handling, business orchestration, and persistence. | C-001, C-002 | Medium | Needs confirmed outcome |
+| Data | project-b | Implemented a validation-first data processing flow from input ingestion to transformed output. | C-003 | Medium | Needs scale or usage context |
+
+The candidate pool is not final resume copy. It is a staging area for comparing wording, role fit, and missing evidence.
+
+### Definition of Done
+
+The evidence package is complete enough for resume drafting when:
+
+- every final bullet candidate links to at least one claim ID
+- every claim ID links to code, docs, a reasonable inference, or user confirmation
+- all metrics, production usage, ownership level, scale, and business impact are user-confirmed or removed
+- assumptions are visible and do not appear as facts in final copy
+- private absolute paths are absent from reusable documentation
+- weak claims have a `Hold` or `Reject` decision instead of leaking into the resume
+- the strongest evidence is easy to find without rereading the whole project
+
+### Compact Evidence Map for Small Projects
+
+For small projects or quick passes, a compact evidence map can replace the full package:
 
 | Project | Evidence | Resume meaning | Status |
 | --- | --- | --- | --- |
@@ -154,7 +260,7 @@ If several tracks are plausible, create separate draft sections instead of forci
 
 ## 8. Outcome Interview
 
-After evidence mapping, ask only for missing facts that materially improve final bullets:
+After building the evidence package, ask only for missing facts that materially improve final bullets:
 
 - Which projects reached production or real users?
 - Who used the project: customers, internal teams, developers, operations, analysts, or another audience?
